@@ -30,14 +30,9 @@ const usuarioSchema = mongoose.Schema({
         type: Number,
         default: 0
     },
-    total: {
+    balance: {
         type: Number,
         default: 0
-    },
-    pais: {
-        type: String,
-        default: null,
-        trim: true
     },
     token: {
         type: String,
