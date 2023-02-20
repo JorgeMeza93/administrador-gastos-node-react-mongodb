@@ -11,12 +11,29 @@ const registrar = async (req, res) => {
     }
     try {
         const usuario = new Usuario(req.body);
-
         const usuarioGuardado = await usuario.save();
     } catch (error) {
         console.log(error);
     }
 }
 
+const confirmar = async (req, res) => {
+    const { token } = req.params;
+    const usuarioConfirmar = await Usuario.findOne({ token });
+    console.log("Encontrado");
+    if(!usuarioConfirmar){
+        const error = new Error("Token inexistente");
+        return res.status(404).json( {msg: error.message } )
+    }
+    try {
+        usuarioConfirmar.token = null;
+        usuarioConfirmar.confirmado = true;
+        await usuarioConfirmar.save();
+        res.json({ msg: "Confirmando cuenta" })
+    } catch (error) {
+        console.log(error);
+    }
+}
 
-export { registrar }
+
+export { registrar, confirmar }
