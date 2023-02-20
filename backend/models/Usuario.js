@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import generarId from "../helpers/generarId.js";
 
 const usuarioSchema = mongoose.Schema({
     nombre: {
@@ -36,7 +37,8 @@ const usuarioSchema = mongoose.Schema({
     },
     token: {
         type: String,
-        trim: true
+        trim: true,
+        default: generarId()
     },
     confirmado: {
         type: Boolean,
