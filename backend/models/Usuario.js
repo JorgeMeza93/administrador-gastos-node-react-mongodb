@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import generarId from "../helpers/generarId.js";
+import bcrypt from "bcrypt";
 
 const usuarioSchema = mongoose.Schema({
     nombre: {
@@ -45,6 +46,14 @@ const usuarioSchema = mongoose.Schema({
         default: false
     }
 })
-
+//Middleware antes de almacenarlo ejecuta lo siguiente
+usuarioSchema.pre("save", async function(next){
+    //Sólo ejecuta esta función si se modificó la contraseña
+    if(!this.isModified("password")){
+        next();
+    }
+    const salt = await bcrypt.genSalt(10);
+    this.password = await bcrypt.hash(this.password, salt);
+});
 const Usuario = mongoose.model("Usuario", usuarioSchema);
 export default Usuario
