@@ -36,8 +36,9 @@ const confirmar = async (req, res) => {
 }
 
 const login = async (req, res) => {
-    const { email } = req.body;
+    const { email, password } = req.body;
     const resultado = await Usuario.findOne({ email });
+    console.log(password)
     if(!resultado){
         const error = new Error("El usuario es inexistente");
         return res.status(404).json({ msg: error.message });
@@ -45,6 +46,14 @@ const login = async (req, res) => {
     if( !resultado.confirmado){
         const error = new Error("El usuario no ha sido confirmado");
         return res.status(403).json({ msg: error.message });
+    }
+    if(await resultado.comprobarPassword(password)){
+        console.log("Password correcto");
+    }
+    else{
+        console.log("Password incorrecto");
+        const error = new Error("El password es incorrecto");
+        return res.status(403).json({ msg: error.message })
     }
 }
 
