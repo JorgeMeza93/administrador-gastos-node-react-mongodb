@@ -1,5 +1,5 @@
 import express from "express";
-import { registrar, confirmar, login } from "../controllers/usuarioController.js";
+import { registrar, confirmar, login, verPerfil } from "../controllers/usuarioController.js";
 import { checkAuth } from "../middlewares/middlewareAuth.js";
 
 const router = express.Router();
@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/registrar", registrar);
 router.get("/confirmar/:token", confirmar);
 router.post("/login", login);
-router.get("/perfil", checkAuth)
+router.get("/perfil", checkAuth, verPerfil)
 
 
 export default router;

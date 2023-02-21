@@ -57,5 +57,8 @@ const login = async (req, res) => {
     }
 }
 
+const verPerfil = (req, res) => {
+   res.json(req.usuario);
+}
 
-export { registrar, confirmar, login }
+export { registrar, confirmar, login, verPerfil }
