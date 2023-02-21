@@ -14,7 +14,7 @@ app.use(express.json());
 conectarDB();
 
 // Routing
-app.use("/api/gastos", usuariosRoutes);
+app.use("/api", usuariosRoutes);
 
 app.listen(port, () => {
     console.log("Hola MundO");

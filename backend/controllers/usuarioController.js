@@ -35,5 +35,18 @@ const confirmar = async (req, res) => {
     }
 }
 
+const login = async (req, res) => {
+    const { email } = req.body;
+    const resultado = await Usuario.findOne({ email });
+    if(!resultado){
+        const error = new Error("El usuario es inexistente");
+        return res.status(404).json({ msg: error.message });
+    }
+    if( !resultado.confirmado){
+        const error = new Error("El usuario no ha sido confirmado");
+        return res.status(403).json({ msg: error.message });
+    }
+}
 
-export { registrar, confirmar }
+
+export { registrar, confirmar, login }
