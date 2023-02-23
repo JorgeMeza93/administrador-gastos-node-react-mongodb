@@ -18,4 +18,23 @@ const obtenerGastos = async (req, res) => {
   res.json(gastos);
 }
 
-export { agregarGasto, obtenerGastos }
+const obtenerGasto = async (req, res) => {
+  const { id } = req.params;
+  const gasto = await Gasto.findById(id);
+  if(gasto.persona._id.toString() !== req.usuario._id.toString()){
+    return res.status(403).json({msg: "Acción no válida"})
+  }
+  if(gasto){
+    return res.json(gasto);
+  }
+}
+
+const actualizarGasto = async (req, res) => {
+
+}
+
+const borrarGasto = async (req, res) => {
+
+}
+
+export { agregarGasto, obtenerGastos, obtenerGasto, actualizarGasto, borrarGasto }
