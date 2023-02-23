@@ -1,7 +1,8 @@
 import express from "express";
 import conectarDB from "./config/db.js";
 import dotenv from "dotenv";
-import usuariosRoutes from "./routes/usuarioRoutes.js"
+import usuariosRoutes from "./routes/usuarioRoutes.js";
+import gastosRoutes from "./routes/gastosRoutes.js";
 
 dotenv.config();
 const app = express();
@@ -15,6 +16,7 @@ conectarDB();
 
 // Routing
 app.use("/api", usuariosRoutes);
+app.use("/api/gastos", gastosRoutes)
 
 app.listen(port, () => {
     console.log("Hola MundO");

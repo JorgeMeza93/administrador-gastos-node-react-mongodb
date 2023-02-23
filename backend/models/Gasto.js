@@ -9,20 +9,20 @@ const gastosSchema = mongoose.Schema({
     persona:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Usuario",
-        required: true
     },
     tipo: {
         type: String,
-        required,
+        required: true,
         trim: true
     },
     monto: {
        type: Number,
-       required,
+       required: true,
        default: 0
     },
     fecha: {
-        type: Date
+        type: Date,
+        default: Date.now()
     },
     comentarios:{
         type: String,

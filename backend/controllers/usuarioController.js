@@ -14,6 +14,7 @@ const registrar = async (req, res) => {
     try {
         const usuario = new Usuario(req.body);
         const usuarioGuardado = await usuario.save();
+        return res.json({ msg: "Usuario registrado con éxito" })
     } catch (error) {
         console.log(error);
     }
@@ -40,9 +41,8 @@ const confirmar = async (req, res) => {
 const login = async (req, res) => {
     const { email, password } = req.body;
     const resultado = await Usuario.findOne({ email });
-    console.log(password)
     if(!resultado){
-        const error = new Error("El usuario es inexistente");
+        const error = new Error("El usuario ingresado es inexistente");
         return res.status(404).json({ msg: error.message });
     }
     if( !resultado.confirmado){
@@ -50,7 +50,7 @@ const login = async (req, res) => {
         return res.status(403).json({ msg: error.message });
     }
     if(await resultado.comprobarPassword(password)){
-       res.json({ token: generarJWT(resultado.id) })
+       res.json({ token: generarJWT(resultado.id), resultado: "Loggeado con éxito" })
     }
     else{
         console.log("Password incorrecto");
