@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/nuevo", checkAuth, agregarGasto);
 router.get("/", checkAuth, obtenerGastos);
 router.get("/:id", checkAuth, obtenerGasto);
-router.put("/:id", checkAuth, actualizarGasto);
+router.patch("/:id", checkAuth, actualizarGasto);
 router.delete("/:id", checkAuth, borrarGasto);
 
 export default router;
