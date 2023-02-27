@@ -9,7 +9,7 @@ const gastosSchema = mongoose.Schema({
     persona:{
         type: mongoose.Schema.Types.ObjectId,
         ref: "Usuario",
-     
+        required: true
     },
     tipo: {
         type: String,
