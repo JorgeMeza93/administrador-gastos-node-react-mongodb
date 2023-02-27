@@ -55,11 +55,23 @@ const actualizarGasto = async (req, res) => {
       console.log(error);
     }
   }
-  
 }
 
 const borrarGasto = async (req, res) => {
-
+  const { id } = req.params;
+  const gastoAEliminar = await Gasto.findById(id);
+  if(!gastoAEliminar){
+    return res.status(404).json({ msg: "No encontrado" });
+  }
+  if(gasto.persona._id.toString() !== req.usuario._id.toString()){
+    return res.json({ msg: "Acción no válida" });
+  }
+  try {
+    await gastoAEliminar.deleteOne();
+    res.json({ msg: "Gasto eliminado correctamente" });
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 export { agregarGasto, obtenerGastos, obtenerGasto, actualizarGasto, borrarGasto }
