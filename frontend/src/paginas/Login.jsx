@@ -8,7 +8,7 @@ const Login = () => {
             <h1 className='text-emerald-500 font-bold text-5xl'>Inicia Sesión y controla tu presupuesto de la mejor forma</h1>
             <h2 className='text-sky-500 font-bold text-3xl'>Administra tus gastos sin mucho esfuerzo</h2>
        </div>
-       <div>
+       <div className='mt-20 shadow-lg px-5 py-10'>
             <form className='w-5/6 m-auto'>
                 <div className='flex justify-around items-center m-5'>
                     <label className='font-bold w-1/4'>Email</label>
