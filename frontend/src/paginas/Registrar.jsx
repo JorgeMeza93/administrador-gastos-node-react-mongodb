@@ -1,26 +1,36 @@
 import React, { Fragment, useState} from 'react';
 import { Link } from 'react-router-dom';
+import Alerta from '../components/Alerta';
 
 const Registrar = () => {
   const [nombre, setNombre] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repetirPassword, setRepetirPassword] = useState("");
-  const [telefono, setTelefono] = useState("")
-  
+  const [telefono, setTelefono] = useState("");
+  const [alerta, setAlerta] = useState({});
+
   const handleSubmit = e => {
     e.preventDefault();
     if([nombre.trim(), email.trim(), password.trim(), repetirPassword.trim(), telefono.trim()].includes("")){
-        console.log("Hay campos vacíos");
+        setAlerta({ msg: "Hay campos vacíos",
+            error: true
+        });
         return
     }
     if(password !== repetirPassword){
-        console.log("Los passwords no son inguales");
+        setAlerta({ msg: "Los passwords no son inguales",
+            error: true
+        });
     }
     if(password.length < 8 ){
-        console.log("El password es muy corto, agrega minímo 8 caracteres");
+        setAlerta({msg: "El password es muy corto, agrega minímo 8 caracteres", 
+            error: true
+        });
     }
+    setAlerta({})
   }
+  const { msg } = alerta
 
   return (
     <Fragment>
@@ -29,6 +39,7 @@ const Registrar = () => {
             <h2 className='text-sky-500 font-bold text-3xl'>Es totalmente gratuito y no te toma más de cinco minutos</h2>
         </div>
         <div className='mt-20 shadow-lg px-5 py-10'>
+            { msg &&  <Alerta alerta={alerta}/>}
             <form className='w-5/6 m-auto' onSubmit={handleSubmit} >
                 <div className='flex justify-around items-center m-5'>
                     <label className='font-bold w-1/4'>Nombre</label>
