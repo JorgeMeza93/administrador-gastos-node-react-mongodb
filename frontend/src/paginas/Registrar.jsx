@@ -1,6 +1,7 @@
 import React, { Fragment, useState} from 'react';
 import { Link } from 'react-router-dom';
 import Alerta from '../components/Alerta';
+import axios from "axios";
 
 const Registrar = () => {
   const [nombre, setNombre] = useState("");
@@ -10,7 +11,7 @@ const Registrar = () => {
   const [telefono, setTelefono] = useState("");
   const [alerta, setAlerta] = useState({});
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
     if([nombre.trim(), email.trim(), password.trim(), repetirPassword.trim(), telefono.trim()].includes("")){
         setAlerta({ msg: "Hay campos vacíos",
@@ -22,14 +23,30 @@ const Registrar = () => {
         setAlerta({ msg: "Los passwords no son inguales",
             error: true
         });
+        return
     }
     if(password.length < 8 ){
-        setAlerta({msg: "El password es muy corto, agrega minímo 8 caracteres", 
+        setAlerta({ msg: "El password es muy corto, agrega minímo 8 caracteres", 
+            error: true
+        });
+        return
+    }
+    setAlerta({})
+    // Crear el usuario en la api
+    try {
+        const url = "http://localhost:4000/api/registrar"
+        const respuesta = axios.post(url, { nombre, password, email, telefono });
+        setAlerta({ msg: "Creado correctamente, revisa tu email",
+            error: false
+        })
+    } catch (error) {
+        setAlerta({
+            msg: error.response.data.msg,
             error: true
         });
     }
-    setAlerta({})
   }
+
   const { msg } = alerta
 
   return (
@@ -39,7 +56,7 @@ const Registrar = () => {
             <h2 className='text-sky-500 font-bold text-3xl'>Es totalmente gratuito y no te toma más de cinco minutos</h2>
         </div>
         <div className='mt-20 shadow-lg px-5 py-10'>
-            { msg &&  <Alerta alerta={alerta}/>}
+            { msg && <Alerta alerta={alerta}/>}
             <form className='w-5/6 m-auto' onSubmit={handleSubmit} >
                 <div className='flex justify-around items-center m-5'>
                     <label className='font-bold w-1/4'>Nombre</label>
