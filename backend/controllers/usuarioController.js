@@ -2,9 +2,10 @@ import Usuario from "../models/Usuario.js"
 import generarJWT from "../helpers/generarJWT.js";
 import generarId from "../helpers/generarId.js";
 import { json } from "express";
+import emailRegistro from "../helpers/emailRegistro.js";
 
 const registrar = async (req, res) => {
-    const { email } = req.body;
+    const { email, nombre } = req.body;
     const existeUsuario = await Usuario.findOne({email});
     if(existeUsuario){
         console.log(`Usuario ya existente ${existeUsuario}`);
@@ -14,6 +15,8 @@ const registrar = async (req, res) => {
     try {
         const usuario = new Usuario(req.body);
         const usuarioGuardado = await usuario.save();
+        //Enviar el email
+        emailRegistro({email, nombre, token: usuarioGuardado.token })
         return res.json({ msg: "Usuario registrado con éxito" })
     } catch (error) {
         console.log(error);
