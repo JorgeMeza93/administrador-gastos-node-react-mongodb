@@ -12,7 +12,7 @@ const ConfirmarCuenta = () => {
   const { token } = params;
   const confirmarCuenta = async () => {
     try {
-      const url = `http://localhost:4000/api/confirmar/${token}`;
+      const url = `${import.meta.env.VITE_BACKEND_URL}/api/confirmar/${token}`;
       const { data } = await axios.get(url);
       setCuentaConfirmada(true);
       setAlerta({

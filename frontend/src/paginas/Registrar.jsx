@@ -34,7 +34,7 @@ const Registrar = () => {
     setAlerta({})
     // Crear el usuario en la api
     try {
-        const url = "http://localhost:4000/api/registrar"
+        const url = `${import.meta.env.VITE_BACKEND_URL}/api/registrar`
         const respuesta = axios.post(url, { nombre, password, email, telefono });
         setAlerta({ msg: "Creado correctamente, revisa tu email",
             error: false
