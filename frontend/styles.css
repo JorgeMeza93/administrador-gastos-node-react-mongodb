@@ -655,18 +655,8 @@ video {
   --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
 }
 
-.from-red-300 {
-  --tw-gradient-from: #fca5a5;
-  --tw-gradient-to: rgb(252 165 165 / 0);
-  --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to);
-}
-
 .to-indigo-600 {
   --tw-gradient-to: #4f46e5;
-}
-
-.to-red-600 {
-  --tw-gradient-to: #dc2626;
 }
 
 .to-red-700 {
