@@ -55,7 +55,7 @@ const Registrar = () => {
             <h1 className='text-emerald-500 font-bold text-5xl'>Crea una cuenta y comienza a administar tu dinero</h1>
             <h2 className='text-sky-500 font-bold text-3xl'>Es totalmente gratuito y no te toma más de cinco minutos</h2>
         </div>
-        <div className='mt-20 shadow-lg px-5 py-10'>
+        <div className='mt-20 shadow-lg px-5 py-10 rounded-xl'>
             { msg && <Alerta alerta={alerta}/>}
             <form className='w-5/6 m-auto' onSubmit={handleSubmit} >
                 <div className='flex justify-around items-center m-5'>
