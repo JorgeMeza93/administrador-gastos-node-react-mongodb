@@ -3,6 +3,7 @@ import generarJWT from "../helpers/generarJWT.js";
 import generarId from "../helpers/generarId.js";
 import { json } from "express";
 import emailRegistro from "../helpers/emailRegistro.js";
+import emailOlvidePassword from "../helpers/emailOlvidePassworld.js";
 
 const registrar = async (req, res) => {
     const { email, nombre } = req.body;
@@ -77,9 +78,14 @@ const olvidePassword = async (req, res) => {
     try {
         existe.token = generarId();
         await existe.save();
+        emailOlvidePassword({
+            email,
+            nombre: existe.nombre,
+            token: existe.token
+        })
         res,json({ msg: "Hemos enviado un email con las instrucciones"});
     } catch (error) {
-        
+        console.log(error);
     }
 }
 
