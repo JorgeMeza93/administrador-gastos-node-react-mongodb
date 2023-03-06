@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import Alerta from '../components/Alerta';
 import axios from 'axios';
@@ -10,6 +10,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [alerta, setAlerta] = useState({});
 
+  const navigate = useNavigate()
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if([email.trim(), password.trim()].includes("") ){
@@ -19,7 +21,8 @@ const Login = () => {
     try {
       const url = `${import.meta.env.VITE_BACKEND_URL}/api/login`;
       const respuesta = await axios.post(url, { email, password });
-      localStorage.setItem("JWT", respuesta.data.token )
+      localStorage.setItem("JWT", respuesta.data.token );
+      navigate("/admin")
     }
     catch (error) {
       setAlerta({ msg: error.response.data.msg, error: true })
