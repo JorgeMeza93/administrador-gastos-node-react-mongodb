@@ -1,7 +1,9 @@
 import React, { Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 const Login = () => {
+  const { auth } = useAuth()
   return (
     <Fragment>
        <div>
