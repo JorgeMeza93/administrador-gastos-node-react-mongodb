@@ -54,7 +54,12 @@ const login = async (req, res) => {
         return res.status(403).json({ msg: error.message });
     }
     if(await resultado.comprobarPassword(password)){
-       res.json({ token: generarJWT(resultado.id), resultado: "Loggeado con éxito" })
+        resultado.token = generarJWT(resultado.id)
+        res.json({ _id: resultado._id, 
+            nombre: resultado.nombre,
+            email: resultado.email,
+            token: resultado.token,
+            resultado: "Loggeado con éxito" })
     }
     else{
         console.log("Password incorrecto");
