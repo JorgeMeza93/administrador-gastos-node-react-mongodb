@@ -5,10 +5,14 @@ const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState({});
+    const [cargando, setCargando] = useState(true);
 
     const autenticarUsuario = async () => {
         const jwtoken = localStorage.getItem("JWT");
-        if(!jwtoken) return
+        if(!jwtoken) {
+            setCargando(false);
+            return
+        }
         const config = {
             headers: {
                 "Content-Type": "application/json",
@@ -24,6 +28,7 @@ const AuthProvider = ({ children }) => {
             console.log(error.response.data.msg);
             setAuth({})
         }
+        setCargando(false);
     }
 
     useEffect( () => {
@@ -31,7 +36,7 @@ const AuthProvider = ({ children }) => {
     }, [])
 
     return (
-        <AuthContext.Provider value={ {auth, setAuth} }>
+        <AuthContext.Provider value={ {auth, setAuth, cargando } }>
             {children}
         </AuthContext.Provider>
     )
