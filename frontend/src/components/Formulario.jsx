@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import Alerta from "./Alerta";
+import useGastos from '../hooks/useGastos';
 
 const Formulario = () => {
   const [nombre, setNombre] = useState("");
@@ -9,6 +10,8 @@ const Formulario = () => {
   const [comentarios, setComentarios] = useState("");
   const [persona, setPersona] = useState("");
   const [alerta, setAlerta] = useState({});
+
+  const { gastos } = useGastos();
 
   const handleSubmit = (e) => {
     e.preventDefault();

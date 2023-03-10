@@ -8,25 +8,28 @@ import NuevoPassword from "./paginas/NuevoPassword";
 import { AuthProvider } from "./context/AuthProvider";
 import RutaProtegida from "./layout/RutaProtegida";
 import AdministrarGastos from "./paginas/AdministrarGastos";
+import { GastosProvider } from "./context/GastosProvider";
 
 function App() {
   return (
   
    <BrowserRouter>
-   <AuthProvider>
-      <Routes>
-        <Route path="/" element={ <Auth/> }>
-          <Route index element={ <Login/> } />
-          <Route path="registrar" element={ <Registrar/> }/>
-          <Route path="olvide-password" element={ <OlvidePassword/> } />
-          <Route path="olvide-password/:token" element={ <NuevoPassword/> } />
-          <Route path="confirmar/:token" element={ <ConfirmarCuenta/> } />
-        </Route>
+    <AuthProvider>
+     <GastosProvider>
+        <Routes>
+          <Route path="/" element={ <Auth/> }>
+            <Route index element={ <Login/> } />
+            <Route path="registrar" element={ <Registrar/> }/>
+            <Route path="olvide-password" element={ <OlvidePassword/> } />
+            <Route path="olvide-password/:token" element={ <NuevoPassword/> } />
+            <Route path="confirmar/:token" element={ <ConfirmarCuenta/> } />
+          </Route>
 
-        <Route path="/admin" element={<RutaProtegida/>}>
-          <Route index element={ <AdministrarGastos/> } />
-        </Route>
-      </Routes>
+          <Route path="/admin" element={<RutaProtegida/>}>
+            <Route index element={ <AdministrarGastos/> } />
+          </Route>
+        </Routes>
+      </GastosProvider>
     </AuthProvider>
    </BrowserRouter>
   )
