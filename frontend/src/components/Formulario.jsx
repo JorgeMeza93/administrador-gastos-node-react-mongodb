@@ -6,12 +6,12 @@ const Formulario = () => {
   const [nombre, setNombre] = useState("");
   const [tipo, setTipo] = useState("");
   const [monto, setMonto] = useState(0);
-  const [fecha, setFecha] = useState(Date.now());
+  const [fecha, setFecha] = useState("");
   const [comentarios, setComentarios] = useState("");
   const [persona, setPersona] = useState("");
   const [alerta, setAlerta] = useState({});
 
-  const { gastos } = useGastos();
+  const { guardarGasto } = useGastos();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,7 +20,10 @@ const Formulario = () => {
         msg: "Todos los campos son obligatorios",
         error: true
       })
+      return
     }
+    setAlerta({});
+    guardarGasto({ nombre, tipo, monto, fecha, comentarios });
   }
   const { msg } = alerta;
   return (
