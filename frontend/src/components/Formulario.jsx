@@ -1,4 +1,5 @@
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react';
+import Alerta from "./Alerta";
 
 const Formulario = () => {
   const [nombre, setNombre] = useState("");
@@ -9,12 +10,23 @@ const Formulario = () => {
   const [persona, setPersona] = useState("");
   const [alerta, setAlerta] = useState({});
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if([nombre.trim(), tipo.trim(), comentarios.trim()].includes("") || monto === 0){
+      setAlerta({
+        msg: "Todos los campos son obligatorios",
+        error: true
+      })
+    }
+  }
+  const { msg } = alerta;
   return (
     <Fragment>
       <p className='text-emerald-500 font-bold mb-10'>
         Añade tus gastos y <span className='text-sky-500 font-bold'>administralos</span>
       </p>
-      <form className='py-10 px-5 mb-10 lg:mb-0 shadow-md rounded-md' >
+      { msg && <Alerta alerta={alerta} /> }
+      <form className='py-10 px-5 mb-10 lg:mb-0 shadow-md rounded-md' onSubmit={handleSubmit} >
         <div className='mb-5'>
           <label htmlFor='nombre' className='text-gray-700 uppercase font-bold' >Nombre</label>
           <input id="nombre" type="text" placeholder='Nombre del Gasto' className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md' value={nombre} onChange={ e => setNombre(e.target.value)} />
