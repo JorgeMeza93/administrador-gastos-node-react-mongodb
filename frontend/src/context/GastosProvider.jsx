@@ -5,6 +5,8 @@ const GastosContext = createContext();
 
 const GastosProvider = ({children}) => {
     const [gastos, setGastos] = useState([]);
+    const [presupuesto, setPresupuesto] = useState(0)
+
     const obtenerGastos = async () => {
         try {
             const token = localStorage.getItem("JWT");
@@ -22,8 +24,26 @@ const GastosProvider = ({children}) => {
             console.log(error);
         }
     }
+    const obtenerPresupuesto = async () => {
+        try {
+            const token = localStorage.getItem("JWT");
+            if( !token) return;
+            const url = `${import.meta.env.VITE_BACKEND_URL}/api/perfil`;
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const respuesta = await axios.get(url, config);
+            console.log(respuesta.data.ingreso);
+        } catch (error) {
+            console.log(error);
+        }
+    }
     useEffect( () => {
-        obtenerGastos(); 
+        obtenerGastos();
+        obtenerPresupuesto();
     }, []) 
     
     const guardarGasto = async (gasto) => {
@@ -46,7 +66,7 @@ const GastosProvider = ({children}) => {
         }
     }
     return (
-        <GastosContext.Provider value={{ gastos, guardarGasto }} >
+        <GastosContext.Provider value={{ gastos, guardarGasto}} >
             {children}
         </GastosContext.Provider>
     )
