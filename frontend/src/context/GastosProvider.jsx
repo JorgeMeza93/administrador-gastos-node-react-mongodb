@@ -17,13 +17,13 @@ const GastosProvider = ({children}) => {
             }
             const url = `${import.meta.env.VITE_BACKEND_URL}/api/gastos`;
             const { data } = await axios.get(url, config);
-            console.log(data);
+           setGastos(data);
         } catch (error) {
             console.log(error);
         }
     }
     useEffect( () => {
-    
+        obtenerGastos(); 
     }, []) 
     
     const guardarGasto = async (gasto) => {

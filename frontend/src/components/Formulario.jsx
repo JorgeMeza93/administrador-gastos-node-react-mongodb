@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import Alerta from "./Alerta";
 import useGastos from '../hooks/useGastos';
+import Presupuesto from './Presupuesto';
 
 const Formulario = () => {
   const [nombre, setNombre] = useState("");
@@ -31,6 +32,7 @@ const Formulario = () => {
       <p className='text-emerald-500 font-bold mb-10'>
         Añade tus gastos y <span className='text-sky-500 font-bold'>administralos</span>
       </p>
+      <Presupuesto/>
       { msg && <Alerta alerta={alerta} /> }
       <form className='py-10 px-5 mb-10 lg:mb-0 shadow-md rounded-md' onSubmit={handleSubmit} >
         <div className='mb-5'>
