@@ -5,7 +5,8 @@ const GastosContext = createContext();
 
 const GastosProvider = ({children}) => {
     const [gastos, setGastos] = useState([]);
-    const [presupuesto, setPresupuesto] = useState(0)
+    const [presupuesto, setPresupuesto] = useState(0);
+    const [isValidPresupuesto, setIsValidPresupuesto] = useState(false);
 
     const obtenerGastos = async () => {
         try {
@@ -36,8 +37,12 @@ const GastosProvider = ({children}) => {
                 }
             }
             const respuesta = await axios.get(url, config);
-            console.log(respuesta.data.ingreso);
-        } catch (error) {
+            setPresupuesto(respuesta.data.ingreso);
+            if( presupuesto >= 0){
+                setIsValidPresupuesto(true)
+            }
+        }
+        catch (error) {
             console.log(error);
         }
     }
@@ -66,7 +71,7 @@ const GastosProvider = ({children}) => {
         }
     }
     return (
-        <GastosContext.Provider value={{ gastos, guardarGasto}} >
+        <GastosContext.Provider value={{ gastos, guardarGasto, presupuesto, isValidPresupuesto}} >
             {children}
         </GastosContext.Provider>
     )
