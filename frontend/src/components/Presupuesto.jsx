@@ -4,6 +4,10 @@ const Presupuesto = () => {
   const [presupuesto, setPresupuesto] = useState(0);
   const handleSubmit = (e) => {
     e.preventDefault();
+    if(Number(presupuesto) < 0){
+      console.log("No es presupuesto válido");
+    }
+    console.log("Si es un presupuesto válido");
   }
   return (
     <Fragment>
