@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import useGastos from '../hooks/useGastos';
 import ControlPresupuesto from './ControlPresupuesto';
+import imagenAñadir from "../img/nuevo-gasto.svg"
 
 const Presupuesto = () => {
   const { presupuesto: ingreso, isValidPresupuesto } = useGastos();
@@ -12,6 +13,9 @@ const Presupuesto = () => {
       return;
     }
     console.log("Si es un presupuesto válido");
+  }
+  const mostrarFormulario = () => {
+    console.log("Has dado click en una cruz");
   }
   return (
     <Fragment>
@@ -25,6 +29,11 @@ const Presupuesto = () => {
               <input type="submit" value="Agregar Presupuesto" className='bg-emerald-600 p-3 w-full font-bold text-white uppercase hover:bg-emerald-700 cursor-pointer transition-colors' />
           </form> 
           )}
+          { isValidPresupuesto ? (
+            <div className='w-10'>
+              <img src={imagenAñadir} alt="Añadir nuevo gasto" onClick={mostrarFormulario} />
+            </div>
+          ): null }
     </Fragment>
   )
 }

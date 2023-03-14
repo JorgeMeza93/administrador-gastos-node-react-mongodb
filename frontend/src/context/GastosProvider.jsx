@@ -71,7 +71,7 @@ const GastosProvider = ({children}) => {
         }
     }
     return (
-        <GastosContext.Provider value={{ gastos, guardarGasto, presupuesto, isValidPresupuesto}} >
+        <GastosContext.Provider value={{ gastos, guardarGasto, presupuesto, setPresupuesto, isValidPresupuesto}} >
             {children}
         </GastosContext.Provider>
     )
