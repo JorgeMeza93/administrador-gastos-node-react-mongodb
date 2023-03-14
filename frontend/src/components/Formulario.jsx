@@ -28,11 +28,11 @@ const Formulario = () => {
   const { msg } = alerta;
   return (
     <Fragment>
-      <p className='text-emerald-500 font-bold mb-10'>
-        Añade tus gastos y <span className='text-sky-500 font-bold'>administralos</span>
+      <p className='text-emerald-500 text-xl font-bold mb-2 text-center'>
+        Añade un nuevo <span className='text-sky-500 font-bold'>gasto</span>
       </p>
       { msg && <Alerta alerta={alerta} /> }
-      <form className='py-10 px-5 mb-10 lg:mb-0 shadow-md rounded-md' onSubmit={handleSubmit} >
+      <form className='py-7 px-5 mb-10 lg:mb-0 shadow-md rounded-md' onSubmit={handleSubmit} >
         <div className='mb-5'>
           <label htmlFor='nombre' className='text-gray-700 uppercase font-bold' >Nombre</label>
           <input id="nombre" type="text" placeholder='Nombre del Gasto' className='border-2 w-full p-2 mt-2 placeholder-gray-400 rounded-md' value={nombre} onChange={ e => setNombre(e.target.value)} />

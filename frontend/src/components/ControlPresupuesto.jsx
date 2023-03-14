@@ -11,7 +11,7 @@ const ControlPresupuesto = () => {
   }
   return (
     <Fragment>
-        <div className='shadow-md flex w-full justify-between'>
+        <div className='shadow-md lg:flex w-full justify-between mt-5 mb-10 rounded-lg p-3'>
             <div className='w-1/2'>
                 Gráfica aqui
             </div>
