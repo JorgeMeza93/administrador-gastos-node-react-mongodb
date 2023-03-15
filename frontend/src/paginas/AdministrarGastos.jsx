@@ -23,7 +23,7 @@ const AdministrarGastos = () => {
           { mostrarFormulario && <Formulario/> }
           { isValidPresupuesto ? (
             <div className='w-10'>
-              <img src={ !mostrarFormulario ? imagenAñadir : imagenQuitar} alt="Añadir nuevo gasto" onClick={ e =>  setMostrarFormulario(!mostrarFormulario) } />
+              <img src={ !mostrarFormulario ? imagenAñadir : imagenQuitar} className="block mt-5" alt="Añadir nuevo gasto" onClick={ e =>  setMostrarFormulario(!mostrarFormulario) } />
             </div>
           ): null }
         </div>
