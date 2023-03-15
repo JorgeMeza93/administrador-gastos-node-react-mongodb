@@ -28,7 +28,7 @@ const Formulario = () => {
   const { msg } = alerta;
   return (
     <Fragment>
-      <p className='text-emerald-500 text-xl font-bold mb-2 text-center'>
+      <p className='text-emerald-500 text-2xl font-bold mb-2 text-center'>
         Añade un nuevo <span className='text-sky-500 font-bold'>gasto</span>
       </p>
       { msg && <Alerta alerta={alerta} /> }

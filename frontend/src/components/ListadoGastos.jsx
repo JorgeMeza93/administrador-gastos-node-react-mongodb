@@ -10,11 +10,13 @@ const ListadoGastos = () => {
       { gastos.length ? (
           <>
             <h2 className='font-black text-3xl text-center'>Listado de Gastos</h2>
-            <p className='text-xl mt-5 mb-10 text-center'>Administra tus <span className='text-emerald-600 font-bold'>Gastos</span></p>
+            <div className='shadow-md'>
+              { gastos.map( gasto =>( <Gasto key={gasto._id} gasto={gasto} />) )  }
+            </div>
           </>
         ) : (
           <>
-            <h2 className='font-black text-3xl text-center'>No hay Pacientes</h2>
+            <h2 className='font-black text-3xl text-center'>No hay Gastos</h2>
             <p className='text-xl mt-5 mb-10 text-center'>Comienza agregando tus gastos</p>
           </>
         )}

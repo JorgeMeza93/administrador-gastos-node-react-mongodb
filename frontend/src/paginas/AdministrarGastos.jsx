@@ -14,7 +14,7 @@ const AdministrarGastos = () => {
 
 
   return (
-   <div className='flex flex-col md:flex-row'>
+   <div className='flex flex-col md:flex-row gap-10'>
         <button type='button' className='bg-emerald-600 text-white uppercase mx-10 p-3 font-bold rounded-md mb-10 md:hidden' onClick={ e => setMostrearGrafica(!mostrearGrafica) } >
           {mostrearGrafica ? "Ocultar Gráfica" : "Mostrar Gráfica"}
         </button>
