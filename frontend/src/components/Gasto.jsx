@@ -1,11 +1,26 @@
 import React from 'react';
 import IconoAhorro from "../img/icono_ahorro.svg";
-import IconoCasa from "../img/icono_casa.svg";
+import IconoHogar from "../img/icono_casa.svg";
 import IconoComida from "../img/icono_comida.svg";
 import IconoGastos from "../img/icono_gastos.svg";
 import IconoEntretenimiento from "../img/icono_ocio.svg";
 import IconoSalud from "../img/icono_salud.svg";
-import IconoSuscripciones from "../img/icono_suscripciones.svg";
+import IconoOtros from "../img/icono_suscripciones.svg";
+import IconoVestimenta from "../img/icono_vestimenta.svg"
+import IconoEducacion from "../img/icono_educacion.svg";
+import IconoBelleza from "../img/icono_belleza.svg";
+
+const diccionarioIconos = {
+  ahorro: IconoAhorro,
+  hogar: IconoHogar,
+  comida: IconoComida,
+  gastos: IconoGastos,
+  entretenimiento: IconoEntretenimiento,
+  salud: IconoSalud,
+  otros: IconoOtros,
+  vestimenta: IconoVestimenta,
+  educacion: IconoEducacion
+}
 
 const Gasto = ({gasto}) => {
   const fecha = new Date(gasto.fecha);
@@ -16,9 +31,9 @@ const Gasto = ({gasto}) => {
   }
   console.log(fecha);
   return (
-    <div className='shadow-md mb-3 flex justify-between items-center'>
-      <div className="">
-
+    <div className='shadow-md mb-3 flex justify-between items-center px-10 py-5'>
+      <div className="flex flex-col md:flex-row md:items-center justify-center">
+        <img src={diccionarioIconos[gasto.tipo]} className="block w-20"/>
         <div className='p-3'>
           <p className='uppercase font-bold text-gray-500'>{gasto.tipo}</p>
           <p>{gasto.nombre}</p>

@@ -47,6 +47,7 @@ const Formulario = () => {
             <option value="vestimenta">Vestimenta</option>
             <option value="ahorro">Ahorro</option>
             <option value="hogar">Hogar</option>
+            <option value="belleza">Belleza</option>
             <option value="otros">Otros</option>
           </select>
         </div>
