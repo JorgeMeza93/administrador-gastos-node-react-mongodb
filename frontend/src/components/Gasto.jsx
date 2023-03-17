@@ -34,15 +34,27 @@ const Gasto = ({gasto}) => {
   }
 
   const leadingActions = () => {
-    console.log("Editar");
+    return (
+      <LeadingActions>
+        <SwipeAction onClick={ () => console.log("Editando") }>
+          Editar
+        </SwipeAction>
+      </LeadingActions>
+    )
   }
   const trailingActions = () => {
-    console.log("Eliminar");
+    return (
+      <TrailingActions>
+        <SwipeAction onClick={ () => console.log("Eliminando")}>
+          Eliminar
+        </SwipeAction>
+      </TrailingActions>
+    )
   }
   return (
     <SwipeableList>
-      <SwipeableListItem leadingActions={leadingActions} trailingActions={trailingActions}>
-        <div className='shadow-md mb-3 flex justify-between items-center px-10 py-5'>
+      <SwipeableListItem leadingActions={leadingActions()} trailingActions={trailingActions()}>
+        <div className='shadow-md mb-3 flex justify-between items-center px-10 py-5 w-full'>
           <div className="flex flex-col md:flex-row md:items-center justify-center">
             <img src={diccionarioIconos[gasto.tipo]} className="block w-20"/>
             <div className='p-3'>
