@@ -3,6 +3,7 @@ import useGastos from "../hooks/useGastos";
 import Gasto from './Gasto';
 import { useNavigate } from "react-router-dom";
 
+
 const ListadoGastos = () => {
   const { gastos } = useGastos();
   const [actualizar, setActualizar] = useState(false);

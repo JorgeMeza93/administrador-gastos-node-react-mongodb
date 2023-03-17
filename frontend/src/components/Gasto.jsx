@@ -9,6 +9,8 @@ import IconoOtros from "../img/icono_suscripciones.svg";
 import IconoVestimenta from "../img/icono_vestimenta.svg"
 import IconoEducacion from "../img/icono_educacion.svg";
 import IconoBelleza from "../img/icono_belleza.svg";
+import { LeadingActions, SwipeableList, SwipeableListItem, SwipeAction, TrailingActions } from "react-swipeable-list";
+import "react-swipeable-list/dist/styles.css"
 
 const diccionarioIconos = {
   ahorro: IconoAhorro,
@@ -30,18 +32,29 @@ const Gasto = ({gasto}) => {
     month: "long",
     day: "2-digit"
   }
+
+  const leadingActions = () => {
+    console.log("Editar");
+  }
+  const trailingActions = () => {
+    console.log("Eliminar");
+  }
   return (
-    <div className='shadow-md mb-3 flex justify-between items-center px-10 py-5'>
-      <div className="flex flex-col md:flex-row md:items-center justify-center">
-        <img src={diccionarioIconos[gasto.tipo]} className="block w-20"/>
-        <div className='p-3'>
-          <p className='uppercase font-bold text-gray-500'>{gasto.tipo}</p>
-          <p>{gasto.nombre}</p>
-          <p className=''><span className='font-black'>Agregado el: </span> { fecha.toLocaleDateString("es-ES", configFecha) }</p>
+    <SwipeableList>
+      <SwipeableListItem leadingActions={leadingActions} trailingActions={trailingActions}>
+        <div className='shadow-md mb-3 flex justify-between items-center px-10 py-5'>
+          <div className="flex flex-col md:flex-row md:items-center justify-center">
+            <img src={diccionarioIconos[gasto.tipo]} className="block w-20"/>
+            <div className='p-3'>
+              <p className='uppercase font-bold text-gray-500'>{gasto.tipo}</p>
+              <p>{gasto.nombre}</p>
+              <p className=''><span className='font-black'>Agregado el: </span> { fecha.toLocaleDateString("es-ES", configFecha) }</p>
+            </div>
+          </div>
+          <p className='font-black text-lg'>${gasto.monto}</p>
         </div>
-      </div>
-      <p className='font-black text-lg'>${gasto.monto}</p>
-    </div>
+      </SwipeableListItem>
+    </SwipeableList>
   )
 }
 
