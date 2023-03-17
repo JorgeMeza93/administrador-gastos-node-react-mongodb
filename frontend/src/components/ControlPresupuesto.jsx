@@ -4,10 +4,15 @@ import useGastos from '../hooks/useGastos';
 const ControlPresupuesto = () => {
   const { presupuesto, gastos } = useGastos();
   const [gastado, setGastado] = useState(0);
-  const [disponoble, setDisponible] = useState(0);
+  const [disponible, setDisponible] = useState(0);
 
   useEffect( () =>{
-    
+    let totalGastado = 0;
+    gastos.map( gasto => {
+      totalGastado += gasto.monto;
+      setGastado(totalGastado);
+    });
+    console.log(totalGastado);
   }, [gastos])
 
   const formatearCantidad = (cantidad) => {
@@ -25,7 +30,7 @@ const ControlPresupuesto = () => {
             <div className='w-1/2'>
                 <p><span className='text-emerald-600 font-bold'>Presupuesto: </span>{ formatearCantidad(presupuesto) }</p>
                 <p><span className='text-emerald-600 font-bold'>Gastado: </span>{ formatearCantidad(gastado) }</p>
-                <p><span className='text-emerald-600 font-bold'>Disponible: </span>{ formatearCantidad(disponoble) }</p>
+                <p><span className='text-emerald-600 font-bold'>Disponible: </span>{ formatearCantidad(presupuesto - gastado) }</p>
             </div>
         </div>
     </Fragment>

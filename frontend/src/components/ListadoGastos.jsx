@@ -1,11 +1,15 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import useGastos from "../hooks/useGastos";
 import Gasto from './Gasto';
+import { useNavigate } from "react-router-dom";
 
 const ListadoGastos = () => {
   const { gastos } = useGastos();
+  const [actualizar, setActualizar] = useState(false);
+  const navigate = useNavigate();
+ 
   useEffect( () => {
-    console.log("Ester Ana es una puta");
+    setActualizar(true);
   }, [gastos])
   return (
     <Fragment>
@@ -13,7 +17,7 @@ const ListadoGastos = () => {
           <>
             <h2 className='font-black text-3xl text-center'>Listado de Gastos</h2>
             <div className='shadow-md'>
-              { gastos.map( gasto =>( <Gasto key={gasto._id} gasto={gasto} />) )  }
+              { actualizar ? gastos.map( gasto =>( <Gasto key={gasto._id} gasto={gasto} />) ) : null }
             </div>
           </>
         ) : (

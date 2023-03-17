@@ -20,7 +20,7 @@ const GastosProvider = ({children}) => {
             }
             const url = `${import.meta.env.VITE_BACKEND_URL}/api/gastos`;
             const { data } = await axios.get(url, config);
-           setGastos(data);
+            await setGastos(data);
         } catch (error) {
             console.log(error);
         }

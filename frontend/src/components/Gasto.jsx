@@ -19,7 +19,8 @@ const diccionarioIconos = {
   salud: IconoSalud,
   otros: IconoOtros,
   vestimenta: IconoVestimenta,
-  educacion: IconoEducacion
+  educacion: IconoEducacion,
+  belleza: IconoBelleza
 }
 
 const Gasto = ({gasto}) => {

@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from 'react';
 import Alerta from "./Alerta";
 import useGastos from '../hooks/useGastos';
+import { useNavigate } from 'react-router-dom';
 
 const Formulario = () => {
   const [nombre, setNombre] = useState("");
@@ -12,8 +13,9 @@ const Formulario = () => {
   const [alerta, setAlerta] = useState({});
 
   const { guardarGasto } = useGastos();
+  const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if([nombre.trim(), tipo.trim(), comentarios.trim()].includes("") || monto === 0){
       setAlerta({
@@ -23,7 +25,9 @@ const Formulario = () => {
       return
     }
     setAlerta({});
-    guardarGasto({ nombre, tipo, monto, fecha, comentarios });
+    await guardarGasto({ nombre, tipo, monto, fecha, comentarios });
+    navigate(0)
+
   }
   const { msg } = alerta;
   return (
