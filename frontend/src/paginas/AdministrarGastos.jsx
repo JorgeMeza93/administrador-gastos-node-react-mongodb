@@ -6,12 +6,12 @@ import imagenAñadir from "../img/nuevo-gasto.svg";
 import imagenQuitar from "../img/menos-gasto.svg"
 import Formulario from '../components/Formulario';
 
+
 const AdministrarGastos = () => {
 
-  const { presupuesto, isValidPresupuesto } = useGastos();
+  const { presupuesto, isValidPresupuesto, gastos } = useGastos();
   const [mostrearGrafica, setMostrearGrafica] = useState(false);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
-
 
   return (
    <div className='flex flex-col md:flex-row gap-10'>

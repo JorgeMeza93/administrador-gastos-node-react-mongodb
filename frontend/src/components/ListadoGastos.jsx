@@ -1,10 +1,12 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import useGastos from "../hooks/useGastos";
 import Gasto from './Gasto';
 
 const ListadoGastos = () => {
   const { gastos } = useGastos();
-  console.log(gastos);
+  useEffect( () => {
+    console.log("Ester Ana es una puta");
+  }, [gastos])
   return (
     <Fragment>
       { gastos.length ? (

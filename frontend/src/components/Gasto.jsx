@@ -29,7 +29,6 @@ const Gasto = ({gasto}) => {
     month: "long",
     day: "2-digit"
   }
-  console.log(fecha);
   return (
     <div className='shadow-md mb-3 flex justify-between items-center px-10 py-5'>
       <div className="flex flex-col md:flex-row md:items-center justify-center">
