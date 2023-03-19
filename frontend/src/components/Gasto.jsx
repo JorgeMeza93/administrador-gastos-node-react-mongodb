@@ -10,7 +10,8 @@ import IconoVestimenta from "../img/icono_vestimenta.svg"
 import IconoEducacion from "../img/icono_educacion.svg";
 import IconoBelleza from "../img/icono_belleza.svg";
 import { LeadingActions, SwipeableList, SwipeableListItem, SwipeAction, TrailingActions } from "react-swipeable-list";
-import "react-swipeable-list/dist/styles.css"
+import "react-swipeable-list/dist/styles.css";
+import useGastos from '../hooks/useGastos';
 
 const diccionarioIconos = {
   ahorro: IconoAhorro,
@@ -26,6 +27,7 @@ const diccionarioIconos = {
 }
 
 const Gasto = ({gasto, setEditar, setMostrarFormulario}) => {
+  const { obtenerGastoId, actualizarGasto } = useGastos();
   const fecha = new Date(gasto.fecha);
   const configFecha = {
     year: "numeric",
@@ -37,8 +39,9 @@ const Gasto = ({gasto, setEditar, setMostrarFormulario}) => {
     return (
       <LeadingActions>
         <SwipeAction onClick={ () => {
-          setMostrarFormulario(true)
-          setEditar(gasto)
+            setMostrarFormulario(true);
+            setEditar(gasto);
+            actualizarGasto(gasto._id)
           } 
         }>
           Editar

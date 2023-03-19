@@ -71,7 +71,7 @@ const GastosProvider = ({children}) => {
             console.log(token);
         }
     }
-    const obtenerGastoID = async (id) => {
+    const obtenerGastoId = async (id) => {
         const token = localStorage.getItem("JWT");
         try {
             const url = `${import.meta.env.VITE_BACKEND_URL}/api/gastos/${id}`;
@@ -82,24 +82,37 @@ const GastosProvider = ({children}) => {
                 }
             }
             const respuesta = await axios.get(url, config);
-            setGasto(respuesta);
-
+            return respuesta;
         } catch (error) {
             console.log(error);
         }
     }
-    const actualizarGasto = async (gasto) => {
+    const actualizarGasto = async (id, gasto) => {
         const token = localStorage.getItem("JWT");
-        const id = gasto._id;
         try {
             const url = `${import.meta.env.VITE_BACKEND_URL}/api/gastos/${id}`;
-        } catch (error) {
-            console.log(error.response.data.msg)
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const respuesta = await axios.get(url, config); 
+            if(respuesta.status === 200){
+                const actualizado = await axios.patch(url, gasto, config);
+                console.log(actualizado);
+            }
+            else{
+                console.log("No encontrado");
+            }
+        }
+        catch (error){
+            console.log(error);
         }
     }
 
     return (
-        <GastosContext.Provider value={{ gastos, guardarGasto, presupuesto, setPresupuesto, isValidPresupuesto, gasto}} >
+        <GastosContext.Provider value={{ gastos, guardarGasto, presupuesto, setPresupuesto, isValidPresupuesto, actualizarGasto }} >
             {children}
         </GastosContext.Provider>
     )
