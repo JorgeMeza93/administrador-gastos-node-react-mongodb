@@ -25,7 +25,7 @@ const diccionarioIconos = {
   belleza: IconoBelleza
 }
 
-const Gasto = ({gasto}) => {
+const Gasto = ({gasto, setEditar, setMostrarFormulario}) => {
   const fecha = new Date(gasto.fecha);
   const configFecha = {
     year: "numeric",
@@ -36,7 +36,11 @@ const Gasto = ({gasto}) => {
   const leadingActions = () => {
     return (
       <LeadingActions>
-        <SwipeAction onClick={ () => console.log("Editando") }>
+        <SwipeAction onClick={ () => {
+          setMostrarFormulario(true)
+          setEditar(gasto)
+          } 
+        }>
           Editar
         </SwipeAction>
       </LeadingActions>

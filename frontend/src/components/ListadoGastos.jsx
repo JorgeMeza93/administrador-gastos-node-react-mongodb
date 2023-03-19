@@ -4,7 +4,7 @@ import Gasto from './Gasto';
 import { useNavigate } from "react-router-dom";
 
 
-const ListadoGastos = () => {
+const ListadoGastos = ({ setEditar, setMostrarFormulario }) => {
   const { gastos } = useGastos();
   const [actualizar, setActualizar] = useState(false);
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const ListadoGastos = () => {
           <>
             <h2 className='font-black text-3xl text-center'>Listado de Gastos</h2>
             <div className='shadow-md'>
-              { actualizar ? gastos.map( gasto =>( <Gasto key={gasto._id} gasto={gasto} />) ) : null }
+              { actualizar ? gastos.map( gasto =>( <Gasto key={gasto._id} gasto={gasto} setEditar={setEditar} setMostrarFormulario={setMostrarFormulario} />) ) : null }
             </div>
           </>
         ) : (

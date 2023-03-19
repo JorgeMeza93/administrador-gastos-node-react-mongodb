@@ -12,6 +12,8 @@ const AdministrarGastos = () => {
   const { presupuesto, isValidPresupuesto, gastos } = useGastos();
   const [mostrearGrafica, setMostrearGrafica] = useState(false);
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [editar, setEditar] = useState({});
+  const [idGasto, setIDGasto] = useState("");
 
   return (
    <div className='flex flex-col md:flex-row gap-10'>
@@ -20,15 +22,19 @@ const AdministrarGastos = () => {
         </button>
         <div className={`${mostrearGrafica ? "block" : "hidden"} md:block md:w-1/2 lg:w-2/5`} >
           <Presupuesto/>
-          { mostrarFormulario && <Formulario/> }
+          { mostrarFormulario && <Formulario editar={editar} /> }
           { isValidPresupuesto ? (
             <div className='w-10'>
-              <img src={ !mostrarFormulario ? imagenAñadir : imagenQuitar} className="block mt-5" alt="Añadir nuevo gasto" onClick={ e =>  setMostrarFormulario(!mostrarFormulario) } />
+              <img src={ !mostrarFormulario ? imagenAñadir : imagenQuitar} className="block mt-5" alt="Añadir nuevo gasto" onClick={ e => {
+                  setMostrarFormulario(!mostrarFormulario)
+                  setEditar({})
+                }
+              } />
             </div>
           ): null }
         </div>
         <div className="md:1/2 lg:w-3/5">
-            <ListadoGastos/>
+            <ListadoGastos setEditar={setEditar} setMostrarFormulario={setMostrarFormulario}  />
         </div>
    </div>
   )

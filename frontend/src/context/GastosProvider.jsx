@@ -7,6 +7,7 @@ const GastosProvider = ({children}) => {
     const [gastos, setGastos] = useState([]);
     const [presupuesto, setPresupuesto] = useState(0);
     const [isValidPresupuesto, setIsValidPresupuesto] = useState(false);
+    const [gasto, setGasto] = useState({});
 
     const obtenerGastos = async () => {
         try {
@@ -70,8 +71,35 @@ const GastosProvider = ({children}) => {
             console.log(token);
         }
     }
+    const obtenerGastoID = async (id) => {
+        const token = localStorage.getItem("JWT");
+        try {
+            const url = `${import.meta.env.VITE_BACKEND_URL}/api/gastos/${id}`;
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const respuesta = await axios.get(url, config);
+            setGasto(respuesta);
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    const actualizarGasto = async (gasto) => {
+        const token = localStorage.getItem("JWT");
+        const id = gasto._id;
+        try {
+            const url = `${import.meta.env.VITE_BACKEND_URL}/api/gastos/${id}`;
+        } catch (error) {
+            console.log(error.response.data.msg)
+        }
+    }
+
     return (
-        <GastosContext.Provider value={{ gastos, guardarGasto, presupuesto, setPresupuesto, isValidPresupuesto}} >
+        <GastosContext.Provider value={{ gastos, guardarGasto, presupuesto, setPresupuesto, isValidPresupuesto, gasto}} >
             {children}
         </GastosContext.Provider>
     )
