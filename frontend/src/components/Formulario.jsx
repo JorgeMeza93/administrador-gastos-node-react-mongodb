@@ -12,7 +12,6 @@ const Formulario = ({ editar }) => {
   const [comentarios, setComentarios] = useState("");
   const [persona, setPersona] = useState("");
   const [alerta, setAlerta] = useState({});
-  const [tipoSubmit, setTipoSubmit] = useState(1);
 
   const { guardarGasto, actualizarGasto } = useGastos();
   const navigate = useNavigate();
@@ -38,12 +37,9 @@ const Formulario = ({ editar }) => {
       })
       return
     }
-    if(tipoSubmit === 1){
-      
-    }
-    else if(tipoSubmit === 2){
-
-    }
+    if(editar.nombre){
+      await actualizarGasto(editar._id, {nombre, tipo, monto, fecha, comentarios})
+    }    
     setAlerta({});
     await guardarGasto({ nombre, tipo, monto, fecha, comentarios });
     navigate(0)
