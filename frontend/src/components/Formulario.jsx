@@ -12,8 +12,9 @@ const Formulario = ({ editar }) => {
   const [comentarios, setComentarios] = useState("");
   const [persona, setPersona] = useState("");
   const [alerta, setAlerta] = useState({});
+  const [tipoSubmit, setTipoSubmit] = useState(1);
 
-  const { guardarGasto } = useGastos();
+  const { guardarGasto, actualizarGasto } = useGastos();
   const navigate = useNavigate();
 
   useEffect( () => {
@@ -36,6 +37,12 @@ const Formulario = ({ editar }) => {
         error: true
       })
       return
+    }
+    if(tipoSubmit === 1){
+      
+    }
+    else if(tipoSubmit === 2){
+
     }
     setAlerta({});
     await guardarGasto({ nombre, tipo, monto, fecha, comentarios });
