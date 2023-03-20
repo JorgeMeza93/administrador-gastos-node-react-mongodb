@@ -111,8 +111,29 @@ const GastosProvider = ({children}) => {
         }
     }
 
+    const eliminarGasto = async (id) => {
+        const token = localStorage.getItem("JWT");
+        try {
+            const url = `${import.meta.env.VITE_BACKEND_URL}/api/gastos/${id}`;
+            const config = {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`
+                }
+            }
+            const respuesta = await axios.get(url, config);
+            if(respuesta.status === 200){
+                const eliminado = await axios.delete(url, config);
+                console.log(eliminado);
+            }
+            return respuesta;
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
-        <GastosContext.Provider value={{ gastos, guardarGasto, presupuesto, setPresupuesto, isValidPresupuesto, actualizarGasto }} >
+        <GastosContext.Provider value={{ gastos, guardarGasto, presupuesto, setPresupuesto, isValidPresupuesto, actualizarGasto, eliminarGasto }} >
             {children}
         </GastosContext.Provider>
     )
