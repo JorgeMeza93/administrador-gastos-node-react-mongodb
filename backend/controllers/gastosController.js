@@ -63,13 +63,14 @@ const borrarGasto = async (req, res) => {
   if(!gastoAEliminar){
     return res.status(404).json({ msg: "No encontrado" });
   }
-  if(gasto.persona._id.toString() !== req.usuario._id.toString()){
+  if(gastoAEliminar.persona._id.toString() !== req.usuario._id.toString()){
     return res.json({ msg: "Acción no válida" });
   }
   try {
     await gastoAEliminar.deleteOne();
-    res.json({ msg: "Gasto eliminado correctamente" });
-  } catch (error) {
+    return res.json({ msg: "Gasto eliminado correctamente" });
+  } 
+  catch (error) {
     console.log(error);
   }
 }

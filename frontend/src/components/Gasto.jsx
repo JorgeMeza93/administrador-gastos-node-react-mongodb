@@ -11,7 +11,8 @@ import IconoEducacion from "../img/icono_educacion.svg";
 import IconoBelleza from "../img/icono_belleza.svg";
 import { LeadingActions, SwipeableList, SwipeableListItem, SwipeAction, TrailingActions } from "react-swipeable-list";
 import "react-swipeable-list/dist/styles.css";
-
+import useGastos from '../hooks/useGastos';
+import { useNavigate } from 'react-router-dom';
 
 const diccionarioIconos = {
   ahorro: IconoAhorro,
@@ -27,6 +28,9 @@ const diccionarioIconos = {
 }
 
 const Gasto = ({gasto, setEditar, setMostrarFormulario}) => {
+  const { eliminarGasto } = useGastos();
+  const navigate = useNavigate();
+
   const fecha = new Date(gasto.fecha);
   const configFecha = {
     year: "numeric",
@@ -50,7 +54,10 @@ const Gasto = ({gasto, setEditar, setMostrarFormulario}) => {
   const trailingActions = () => {
     return (
       <TrailingActions>
-        <SwipeAction onClick={ () => console.log("Eliminando")}>
+        <SwipeAction onClick={ async () => {
+          await eliminarGasto(gasto._id);
+          navigate(0)
+        }}>
           Eliminar
         </SwipeAction>
       </TrailingActions>
