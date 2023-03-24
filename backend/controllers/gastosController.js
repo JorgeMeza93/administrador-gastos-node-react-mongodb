@@ -13,7 +13,6 @@ const agregarGasto = async (req, res) => {
 }
 
 const obtenerGastos = async (req, res) => {
-  console.log(req)
   const gastos = await Gasto.find().where("persona").equals(req.usuario._id);
   res.json(gastos);
 }
