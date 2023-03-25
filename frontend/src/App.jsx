@@ -9,6 +9,8 @@ import { AuthProvider } from "./context/AuthProvider";
 import RutaProtegida from "./layout/RutaProtegida";
 import AdministrarGastos from "./paginas/AdministrarGastos";
 import { GastosProvider } from "./context/GastosProvider";
+import EditarPerfil from "./paginas/EditarPerfil";
+import CambiarPassword from "./paginas/CambiarPassword";
 
 function App() {
   return (
@@ -27,6 +29,8 @@ function App() {
 
           <Route path="/admin" element={<RutaProtegida/>}>
             <Route index element={ <AdministrarGastos/> } />
+            <Route path="perfil" element={ <EditarPerfil/>} />
+            <Route path="cambiar-password" element={ <CambiarPassword/>} />
           </Route>
         </Routes>
       </GastosProvider>
