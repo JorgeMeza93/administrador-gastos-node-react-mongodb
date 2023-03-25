@@ -22,7 +22,6 @@ const AuthProvider = ({ children }) => {
         try {
             const url = `${import.meta.env.VITE_BACKEND_URL}/api/perfil`;
             const respuesta = await axios.get(url, config);
-            console.log(respuesta.data);
             setAuth(respuesta.data)
         } catch (error) {
             console.log(error.response.data.msg);
