@@ -1,7 +1,6 @@
 import Usuario from "../models/Usuario.js"
 import generarJWT from "../helpers/generarJWT.js";
 import generarId from "../helpers/generarId.js";
-import { json } from "express";
 import emailRegistro from "../helpers/emailRegistro.js";
 import emailOlvidePassword from "../helpers/emailOlvidePassworld.js";
 
@@ -124,4 +123,8 @@ const nuevoPassword = async (req, res) => {
     }
 }
 
-export { registrar, confirmar, login, verPerfil, olvidePassword, comprobarToken, nuevoPassword }
+const actualizarPerfil = async (req, res) => {
+    console.log(req.params);
+    console.log(req.body);
+}
+export { registrar, confirmar, login, verPerfil, olvidePassword, comprobarToken, nuevoPassword, actualizarPerfil }

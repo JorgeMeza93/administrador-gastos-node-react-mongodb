@@ -39,8 +39,29 @@ const AuthProvider = ({ children }) => {
         setAuth({})
     }
 
+    const actualizarPerfil = async datos => {
+        const jwt = localStorage.getItem("JWT");
+        if(!jwt){
+            setCargando(false);
+            return 
+        }
+        const config = {
+            headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${jwt}`
+            }
+        }
+        try {
+            const url = `${import.meta.env.VITE_BACKEND_URL}/api/perfil/${datos._id}`;
+            const respuesta = await axios.put(url, datos, config);
+            console.log(respuesta);
+        } catch (error) {
+            console.log(error.response);
+        }
+    }
+
     return (
-        <AuthContext.Provider value={ {auth, setAuth, cargando, cerrarSesion } }>
+        <AuthContext.Provider value={ {auth, setAuth, cargando, cerrarSesion, actualizarPerfil } }>
             {children}
         </AuthContext.Provider>
     )

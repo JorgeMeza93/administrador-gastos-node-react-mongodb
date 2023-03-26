@@ -1,5 +1,5 @@
 import express from "express";
-import { registrar, confirmar, login, verPerfil, olvidePassword, comprobarToken, nuevoPassword } from "../controllers/usuarioController.js";
+import { registrar, confirmar, login, verPerfil, olvidePassword, comprobarToken, nuevoPassword, actualizarPerfil } from "../controllers/usuarioController.js";
 import { checkAuth } from "../middlewares/middlewareAuth.js";
 
 const router = express.Router();
@@ -10,10 +10,12 @@ router.get("/confirmar/:token", confirmar);
 router.post("/login", login);
 router.post("/olvide-password", olvidePassword);
 router.get("/olvide-password/:token", comprobarToken);
-router.post("/olvide-password/:token", nuevoPassword)
+router.post("/olvide-password/:token", nuevoPassword);
+
 
 // Área privada
 router.get("/perfil", checkAuth, verPerfil);
+router.put("/perfil/:id", checkAuth, actualizarPerfil)
 
 
 export default router;
