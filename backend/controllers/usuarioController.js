@@ -124,7 +124,29 @@ const nuevoPassword = async (req, res) => {
 }
 
 const actualizarPerfil = async (req, res) => {
-    console.log(req.params);
-    console.log(req.body);
+   const usuario = await Usuario.findById(req.body._id);
+   if(!usuario){
+    const error = new Error("Ha ocurrido un error al buscar el usuario");
+    return res.status(400).json({ msg: error.msg });
+    }
+    const { email } = req.body;
+    if(usuario.email !== req.body.email){
+        const existeEmail = await Usuario.findOne({ email });
+        if(existeEmail){
+            const error = new Error("Email ya está registrado");
+            return res.status(400).json({msg: error.message });
+        }
+    }
+    try {
+        usuario.nombre = req.body.nombre || usuario.nombre;
+        usuario.email = req.body.email || usuario.email;
+        usuario.telefono = req.body.telefono || usuario.telefono;
+        const usuarioActualizado = await usuario.save();
+        res.json(usuarioActualizado);
+    }
+    catch (error) {
+        console.log(error);
+    }
+    
 }
 export { registrar, confirmar, login, verPerfil, olvidePassword, comprobarToken, nuevoPassword, actualizarPerfil }

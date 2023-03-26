@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import generarId from "../helpers/generarId.js";
 import bcrypt from "bcrypt";
 
-const usuarioSchema = mongoose.Schema({
+const usuarioSchema = await mongoose.Schema({
     nombre: {
         type: String,
         required: true,

@@ -15,7 +15,7 @@ router.post("/olvide-password/:token", nuevoPassword);
 
 // Área privada
 router.get("/perfil", checkAuth, verPerfil);
-router.put("/perfil/:id", checkAuth, actualizarPerfil)
+router.patch("/perfil/:id", actualizarPerfil)
 
 
 export default router;

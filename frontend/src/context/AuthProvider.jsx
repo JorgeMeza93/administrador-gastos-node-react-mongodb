@@ -53,11 +53,17 @@ const AuthProvider = ({ children }) => {
         }
         try {
             const url = `${import.meta.env.VITE_BACKEND_URL}/api/perfil/${datos._id}`;
-            const respuesta = await axios.put(url, datos, config);
-            console.log(respuesta);
+            const respuesta = await axios.patch(url, datos, config);
+            return {
+                msg: "Actualizado Correctamente"
+            }
         } catch (error) {
-            console.log(error.response);
+            return {
+                msg: error.response.data.msg,
+                error: true
+            }
         }
+
     }
 
     return (

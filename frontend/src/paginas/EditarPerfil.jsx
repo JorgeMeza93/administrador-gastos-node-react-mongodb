@@ -12,14 +12,15 @@ const EditarPerfil = () => {
     setPerfil(auth);
   }, [auth])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const { nombre, email, telefono } = perfil;
     if([nombre.trim(), email.trim(), telefono.trim()].includes("")){
         setAlerta({ msg: "Todos los campos son obligatorios", error: true });
         return
     }
-    actualizarPerfil(perfil);
+    const resultado = await actualizarPerfil(perfil);
+    setAlerta(resultado)
   }
   const { msg } = alerta;
   return (
