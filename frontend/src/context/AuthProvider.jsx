@@ -67,7 +67,25 @@ const AuthProvider = ({ children }) => {
     }
 
     const actualizarPassword = async (datos) => {
-        console.log(datos);
+       const token = localStorage.getItem("JWT");
+       if(!token){
+        setCargando(false)
+        return
+       }
+       const config = {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`
+          }
+       }
+       try {
+          const url = `${import.meta.env.VITE_BACKEND_URL}/api/actualizar-password`;
+          const respuesta = await axios.put(url, datos, config);
+          
+       }
+       catch (error) {
+         console.log(error.response.data.msg);
+       }
     }
 
     return (

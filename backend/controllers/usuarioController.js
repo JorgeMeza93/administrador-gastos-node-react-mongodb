@@ -147,6 +147,25 @@ const actualizarPerfil = async (req, res) => {
     catch (error) {
         console.log(error);
     }
-    
 }
-export { registrar, confirmar, login, verPerfil, olvidePassword, comprobarToken, nuevoPassword, actualizarPerfil }
+
+const actualizarPassword = async (req, res) => {
+    const { _id } = req.usuario;
+    const { passwordActual, passwordNuevo } = req.body;
+    const usuario = await Usuario.findById( _id );
+    if( !usuario ){
+        const error = new Error("Ha ocurrido un error al actualizar password");
+        return res.status(400).json({ msg: error.message });
+    }
+    if( await usuario.comprobarPassword(passwordActual)){
+        usuario.password = passwordNuevo;
+        await usuario.save();
+        res.json({ msg: "Password cambiado correctamente" })
+    }
+    else{
+        const error = new Error("El password actual es incorrecto");
+        return res.status(400).json({ msg: error.message });
+    }
+}
+
+export { registrar, confirmar, login, verPerfil, olvidePassword, comprobarToken, nuevoPassword, actualizarPerfil, actualizarPassword }

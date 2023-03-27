@@ -1,5 +1,5 @@
 import express from "express";
-import { registrar, confirmar, login, verPerfil, olvidePassword, comprobarToken, nuevoPassword, actualizarPerfil } from "../controllers/usuarioController.js";
+import { registrar, confirmar, login, verPerfil, olvidePassword, comprobarToken, nuevoPassword, actualizarPerfil, actualizarPassword } from "../controllers/usuarioController.js";
 import { checkAuth } from "../middlewares/middlewareAuth.js";
 
 const router = express.Router();
@@ -15,7 +15,7 @@ router.post("/olvide-password/:token", nuevoPassword);
 
 // Área privada
 router.get("/perfil", checkAuth, verPerfil);
-router.patch("/perfil/:id", actualizarPerfil)
-
+router.patch("/perfil/:id", actualizarPerfil);
+router.put("/actualizar-password", checkAuth, actualizarPassword)
 
 export default router;
