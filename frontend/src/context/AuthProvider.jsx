@@ -81,10 +81,15 @@ const AuthProvider = ({ children }) => {
        try {
           const url = `${import.meta.env.VITE_BACKEND_URL}/api/actualizar-password`;
           const respuesta = await axios.put(url, datos, config);
-          
+          return {
+            msg: respuesta.data.msg
+          }
        }
        catch (error) {
-         console.log(error.response.data.msg);
+         return {
+            msg: error.response.data.msg,
+            error: true
+         }
        }
     }
 

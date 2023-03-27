@@ -9,7 +9,7 @@ const CambiarPassword = () => {
   const [alerta, setAlerta] = useState({});
   const [password, setPassword] = useState({ passwordActual: "", passwordNuevo: "" })
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if(Object.values(password).some( campo => campo === "")){
       setAlerta({
@@ -24,7 +24,8 @@ const CambiarPassword = () => {
         error: true
       })
     }
-    actualizarPassword(password);
+    const respuesta = await actualizarPassword(password);
+    setAlerta(respuesta);
   }
   const { msg } = alerta;
   return (

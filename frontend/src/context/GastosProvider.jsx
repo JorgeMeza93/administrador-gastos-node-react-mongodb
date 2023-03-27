@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from "react";
 import axios from "axios";
+import useAuth from "../hooks/useAuth";
 
 const GastosContext = createContext();
 
@@ -8,6 +9,8 @@ const GastosProvider = ({children}) => {
     const [presupuesto, setPresupuesto] = useState(0);
     const [isValidPresupuesto, setIsValidPresupuesto] = useState(false);
     const [gasto, setGasto] = useState({});
+
+    const { auth } = useAuth();
 
     const obtenerGastos = async () => {
         try {
@@ -50,7 +53,7 @@ const GastosProvider = ({children}) => {
     useEffect( () => {
         obtenerGastos();
         obtenerPresupuesto();
-    }, []) 
+    }, [auth]) 
     
     const guardarGasto = async (gasto) => {
         const token = localStorage.getItem("JWT");
